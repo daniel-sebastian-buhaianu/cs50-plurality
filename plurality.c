@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 // Max number of candidates
 #define MAX 9
@@ -24,7 +25,7 @@ int candidate_count;
 bool vote(char* name);
 void print_winner(void);
 
-int main(int argc, string argv[])
+int main(int argc, char* argv[])
 {
     // Check for invalid usage
     if (argc < 2)
@@ -69,7 +70,7 @@ int main(int argc, string argv[])
 }
 
 // Update vote totals given a new vote
-bool vote(string name)
+bool vote(char* name)
 {
     // TODO
     return false;
