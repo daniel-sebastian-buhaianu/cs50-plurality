@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
     }
 
     int voter_count;
+    printf("Number of voters: ");
     scanf("%i", &voter_count);
 
     // Loop over all voters
@@ -57,6 +58,7 @@ int main(int argc, char* argv[])
 	name = (char*) malloc(MAX_NAME_LEN + 1);
 	printf("Vote: ");
 	fgets(name, sizeof(name), stdin);
+	name[strcspn(name, "\n")] = '\0';
 
         // Check for invalid vote
         if (!vote(name))
@@ -72,8 +74,15 @@ int main(int argc, char* argv[])
 // Update vote totals given a new vote
 bool vote(char* name)
 {
-    // TODO
-    return false;
+	for (int i = 0; i < MAX; i++)
+	{
+		if (strcmp(candidates[i].name, name) == 0)
+		{
+			candidates[i].votes++;
+			return true;
+		}
+	}
+	return false;
 }
 
 // Print the winner (or winners) of the election
