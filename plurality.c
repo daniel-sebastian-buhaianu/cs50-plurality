@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include <stdlib.h>
 
 // Max number of candidates
 #define MAX 9
@@ -54,11 +53,9 @@ int main(int argc, char* argv[])
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
     {
-	char* name;
-	name = (char*) malloc(MAX_NAME_LEN + 1);
 	printf("Vote: ");
-	fgets(name, sizeof(name), stdin);
-	name[strcspn(name, "\n")] = '\0';
+	char* name;
+	scanf("%s", name);
 
         // Check for invalid vote
         if (!vote(name))
@@ -74,7 +71,7 @@ int main(int argc, char* argv[])
 // Update vote totals given a new vote
 bool vote(char* name)
 {
-	for (int i = 0; i < MAX; i++)
+	for (int i = 0; i < candidate_count; i++)
 	{
 		if (strcmp(candidates[i].name, name) == 0)
 		{
@@ -89,14 +86,14 @@ bool vote(char* name)
 void print_winner(void)
 {
 	int max_votes = 0;
-	for (int i = 0; i < MAX; i++)
+	for (int i = 0; i < candidate_count; i++)
 	{
 		if (candidates[i].votes > max_votes)
 		{
 			max_votes = candidates[i].votes;
 		}
 	}
-	for (int i = 0; i < MAX; i++)
+	for (int i = 0; i < candidate_count; i++)
 	{
 		if (candidates[i].votes == max_votes)
 		{
