@@ -1,14 +1,15 @@
-#include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 // Max number of candidates
 #define MAX 9
+#define MAX_NAME_LEN 20
 
 // Candidates have name and vote count
 typedef struct
 {
-    string name;
+    char* name;
     int votes;
 }
 candidate;
@@ -20,7 +21,7 @@ candidate candidates[MAX];
 int candidate_count;
 
 // Function prototypes
-bool vote(string name);
+bool vote(char* name);
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -45,12 +46,16 @@ int main(int argc, string argv[])
         candidates[i].votes = 0;
     }
 
-    int voter_count = get_int("Number of voters: ");
+    int voter_count;
+    scanf("%i", &voter_count);
 
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
     {
-        string name = get_string("Vote: ");
+	char* name;
+	name = (char*) malloc(MAX_NAME_LEN + 1);
+	printf("Vote: ");
+	fgets(name, sizeof(name), stdin);
 
         // Check for invalid vote
         if (!vote(name))
